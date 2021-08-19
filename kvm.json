@@ -1,0 +1,41 @@
+{
+  "builders": [
+    {
+      "type": "qemu",
+      "iso_url": "https://dietpi.com/downloads/images/DietPi_RPi-ARMv8-Bullseye.7z",
+      "iso_checksum": "file://./dietpi/hash.txt",
+      "iso_target_path": "./iso",
+      "iso_target_extension": "7z",
+      "output_directory": "dietpi_out",
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+      "disk_size": "20000M",
+      "format": "qcow2",
+      "accelerator": "kvm",
+      "http_directory": "path/to/httpdir",
+      "communicator": "ssh",
+      "ssh_port": "22",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_timeout": "5m",
+      "vm_name": "debian11",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "boot_wait": "20s",
+      "headless": true,
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos6-ks.cfg<enter><wait>"
+      ],
+      "cpus": 2,
+      "format": "qcow2",
+      "machine_type": "virt-4.2",
+      "net_device": "e1000",
+      "qemuargs": [
+        [],
+        []
+      ],
+      "qemu_binary": "qemu-system-aarch64",
+      "shutdown_timeout": "2m",
+      "disable_vnc": true
+    }
+  ]
+}
